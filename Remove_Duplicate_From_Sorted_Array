@@ -1,10 +1,4 @@
 
-//XOR method // int unique_nums_count=0; 
-        // for(int i=0;i<nums.size();i++){
-        //     unique_nums_count^=nums[i];
-        // }
-        // cout<<"Unique number count "<<unique_nums_count<<endl;
-        // return unique_nums_count;
 
 //45 days challenge 
 class Solution {
