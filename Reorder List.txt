@@ -1,0 +1,30 @@
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        if (!head || !head->next) return;
+        
+        stack<ListNode*> st;
+        ListNode* curr = head;
+        
+        // Push all nodes onto the stack
+        while (curr) {
+            st.push(curr);
+            curr = curr->next;
+        }
+        
+        ListNode* temp = head;
+        int size = st.size();
+        int half = size / 2;
+        
+        for (int i = 0; i < half; ++i) {
+            ListNode* topStack = st.top();
+            st.pop();
+            
+            topStack->next = temp->next;
+            temp->next = topStack;
+            temp = topStack->next;
+        }
+      // the last node should point to null , as temp will be middle so make it last
+        temp->next = nullptr;
+    }
+};
