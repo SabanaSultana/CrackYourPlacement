@@ -1,0 +1,45 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverse(ListNode* head) {
+        ListNode* curr=head;
+        ListNode* prev=NULL;
+        while(curr!=NULL){
+            ListNode* next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        return prev;
+    }
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* reverseL1=reverse(l1);
+        ListNode* reverseL2=reverse(l2);
+        ListNode* dummyNode=new ListNode(0);
+        ListNode* temp=dummyNode;
+        int carry=0;
+        while(reverseL1 || reverseL2 || carry){
+            int d1=(reverseL1==NULL) ? 0:reverseL1->val;
+            int d2=(reverseL2==NULL) ? 0:reverseL2->val;
+            int sum=d1+d2+carry;
+            int digit=sum%10;
+            carry=sum/10;
+            ListNode* newNode=new ListNode(digit);
+            temp->next=newNode;
+            temp=temp->next;
+            reverseL1=(reverseL1!=NULL ? reverseL1->next:NULL);
+            reverseL2=(reverseL2!=NULL ? reverseL2->next:NULL);
+        }
+        ListNode* ansNode=dummyNode->next;
+        return reverse(ansNode);
+    }
+};
